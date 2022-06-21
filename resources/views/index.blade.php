@@ -24,9 +24,10 @@
                         <option class="select2-selection__placeholder" value="" selected>Selecione a moeda de de
                             conversao
                         </option>
-                        <option value="USD">USD</option>
-                        <option value="EUR">EUR</option>
-                        <option value="BTC">BTC</option>
+                        @foreach($response as $key => $value)
+                            <option value="{{$value['code_to']}}">{{$value['code_to']}}</option>
+                        @endforeach
+
                     </select>
                 </div>
                 <div class="form-group">

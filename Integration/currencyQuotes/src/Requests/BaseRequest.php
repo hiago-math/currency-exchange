@@ -45,7 +45,7 @@ abstract class BaseRequest
 
     private function createUriExchangeByCurrencyDefaultAndPurchased(string $uri, string $currency): string
     {
-        $default = CurrencyHelper::getDefaultCurrency();
+        $default = data_get($this->config, 'currency.default_currency');
         return $uri . "{$currency}-{$default}";
     }
 

@@ -14,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})
-->name('index');
+require __DIR__ . '/web/currency.php';
+require __DIR__ . '/web/exchange.php';
 
-Route::post ('/exchange', ExchangeController::class . '@enterExchangeProccess')
-    ->name ('enter_exchange');

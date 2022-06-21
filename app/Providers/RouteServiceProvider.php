@@ -38,9 +38,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            Route::prefix('currency')
+            Route::namespace($this->namespace)
 //                ->middleware('api')
-                ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
 
             Route::middleware('web')

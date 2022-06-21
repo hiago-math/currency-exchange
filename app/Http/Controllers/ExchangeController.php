@@ -30,9 +30,7 @@ class ExchangeController extends Controller
         } catch (Exception $exception) {
             $message = $exception->getMessage();
             $code = $exception->getCode();
-            return view( 'fails', compact('message', 'code')
-            );
-
+            return view( 'fails', compact('message', 'code'));
         }
 
         return view('details', compact ('response'));

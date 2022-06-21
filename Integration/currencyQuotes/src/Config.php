@@ -21,5 +21,8 @@ trait Config
                 'uri' => 'all/'
             ]
         ],
+        'currency' => [
+            'default_currency' => 'BRL'
+        ]
     ];
 }
