@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Integration\currencyQuotes\src\Requests;
 
+use App\Domain\Helper\CurrencyHelper;
 use Integration\currencyQuotes\src\Config;
 use Integration\currencyQuotes\src\Request;
 
@@ -13,7 +14,6 @@ abstract class BaseRequest
 
     private $request;
     protected $route;
-    protected $requiredFields;
     protected $method;
     protected $uri;
     private $baseUrl;
@@ -25,7 +25,7 @@ abstract class BaseRequest
 
     private function setConnection(): string
     {
-        return data_get($this->config, 'base_url.default_json');
+        return env('CURRENCY_API');
     }
 
     protected function request(array $payload): Request
@@ -42,7 +42,7 @@ abstract class BaseRequest
 
     private function createUriExchangeByCurrencyDefaultAndPurchased(string $uri, string $currency): string
     {
-        $default = data_get($this->config, 'currency.default_currency');
+        $default = CurrencyHelper::getDefaultCurrency();
         return $uri . "{$currency}-{$default}";
     }
 

@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace Integration\currencyQuotes\src;
 
-use App\Component\Enumerators\CurrencyEnumerators;
+use App\Domain\Repositories\Tables\CurrencyRepository;
 
 trait Config
 {
     protected $config = [
-        'base_url' => [
-            'default_json' => 'https://economia.awesomeapi.com.br/json/'
-        ],
         'requests' => [
             'last_occurrence' => [
                 'method' => 'get',
@@ -22,8 +19,5 @@ trait Config
                 'uri' => 'daily/'
             ]
         ],
-        'currency' => [
-            'default_currency' => CurrencyEnumerators::DEFAULT_CURRENCY
-        ]
     ];
 }
