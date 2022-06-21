@@ -83,5 +83,10 @@ abstract class BaseRepository
     {
         return $instance->delete();
     }
+
+    public function truncate()
+    {
+        $this->model::truncate();
+    }
 }
 

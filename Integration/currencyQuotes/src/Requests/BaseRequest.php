@@ -28,13 +28,16 @@ abstract class BaseRequest
         return env('CURRENCY_API');
     }
 
-    protected function request(array $payload): Request
+    protected function request(array $payload = []): Request
     {
-        $method  = data_get($this->config, 'requests.' . $this->route . '.method');
-        $uri     = data_get($this->config, 'requests.' . $this->route . '.uri');
+        $uri = data_get($this->config, 'requests.' . $this->route . '.uri');
+        $method = data_get($this->config, 'requests.' . $this->route . '.method');
         $currency = data_get($payload, 'current_purchased');
 
-        $uri = $this->createUriExchangeByCurrencyDefaultAndPurchased($uri, $currency);
+        if (!empty($payload)) {
+            $uri = $this->createUriExchangeByCurrencyDefaultAndPurchased($uri, $currency);
+        }
+
         $url = $this->setConnection();
 
         return $this->request->$method($url . $uri);

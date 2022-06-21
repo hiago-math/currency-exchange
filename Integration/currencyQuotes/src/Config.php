@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Integration\currencyQuotes\src;
 
-use App\Domain\Repositories\Tables\CurrencyRepository;
-
 trait Config
 {
     protected $config = [
@@ -17,6 +15,10 @@ trait Config
             'daily_occurrence' => [
                 'method' => 'get',
                 'uri' => 'daily/'
+            ],
+            'all_cuurency' => [
+                'method' => 'get',
+                'uri' => 'all/'
             ]
         ],
     ];
