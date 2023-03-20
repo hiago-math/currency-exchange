@@ -16,7 +16,7 @@ trait Config
                 'method' => 'get',
                 'uri' => 'daily/'
             ],
-            'all_cuurency' => [
+            'all_currency' => [
                 'method' => 'get',
                 'uri' => 'all/'
             ]

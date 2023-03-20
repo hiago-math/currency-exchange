@@ -8,9 +8,10 @@ RUN apt-get update && \
     apt-get install -y git
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
+    && apt-get install -y \
     curl \
     libssl-dev \
+    nginx \
     openssl \
     nano \
     cron \
@@ -22,16 +23,25 @@ RUN apt-get update \
     libmcrypt-dev \
     libcurl4-openssl-dev \
     libxml2-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
     libxslt-dev \
+    zlib1g-dev \
+    zip \
+    libzip-dev \
     && pecl install \
     mcrypt-1.0.2 \
-    redis-5.1.1 \
+    redis \
     mongodb
 
-RUN docker-php-ext-install pdo_mysql && docker-php-ext-enable pdo_mysql
+RUN docker-php-ext-install pdo_mysql gd zip\
+    && docker-php-ext-enable pdo_mysql zip \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg
+
 
 # Copy opcache configration
-COPY ./opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+COPY opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
 # Install the xdebug
 COPY ./xdebug.ini /tmp
@@ -44,10 +54,10 @@ RUN pecl install xdebug \
 COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 # composer:
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=1.10.21
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Copy php.ini configration
-COPY ./php.ini /usr/local/etc/php/php.ini
+COPY php.ini /usr/local/etc/php/php.ini
 
 # Clear package lists
 RUN rm -rf /var/lib/apt/lists/*

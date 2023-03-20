@@ -5,7 +5,7 @@ namespace Integration\currencyQuotes\src\Requests;
 
 class AllCurrency extends BaseRequest
 {
-    protected $route = 'all_cuurency';
+    protected $route = 'all_currency';
 
     /**
      * @param mixed[] $payload
